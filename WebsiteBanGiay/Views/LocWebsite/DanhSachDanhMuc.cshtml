@@ -1,0 +1,16 @@
+﻿@using WebsiteBanGiay.Models;
+@model List<DanhMuc>
+
+    <div id="menu" style="margin-top: -10%">
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <a href="#@item.MaDanhMuc">
+                        <img src="@Url.Content("~/HinhAnh/DanhMuc/"+item.HinhAnhDanhMuc)" style="width: 30px; height: 30px" />
+                        @item.TenDanhMuc
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>

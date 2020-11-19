@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="38cb3c67684b442d9bbf277b00359e19" Name="Diagram1">
+        <EntityTypeShape EntityType="GiayModel.Admin" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiayModel.BinhLuan" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiayModel.CTDatHang" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiayModel.DanhMuc" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiayModel.DonDatHang" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiayModel.Giay" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiayModel.KhachHang" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiayModel.PhanLoai" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GiayModel.TraLoi" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <AssociationConnector Association="GiayModel.FK_Giay_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="GiayModel.FK_BinhLuan_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="GiayModel.FK_TraLoi_BinhLuan" ManuallyRouted="false" />
+        <AssociationConnector Association="GiayModel.FK_CTDatHang_DonDatHang" ManuallyRouted="false" />
+        <AssociationConnector Association="GiayModel.FK_CTDatHang_Giay" ManuallyRouted="false" />
+        <AssociationConnector Association="GiayModel.FK_Giay_DanhMuc" ManuallyRouted="false" />
+        <AssociationConnector Association="GiayModel.FK_DonDatHang_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="GiayModel.FK_Giay_PhanLoai" ManuallyRouted="false" />
+        <AssociationConnector Association="GiayModel.FK_TraLoi_KhachHang" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

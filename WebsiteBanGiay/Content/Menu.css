@@ -1,0 +1,23 @@
+﻿#menu ul {
+    background: #f6f6f4;
+    width: 100%;
+    padding: 0;
+    list-style-type: none;
+    text-align: left;
+}
+#menu li {
+    width: auto;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #e8e8e8;
+    padding: 0 1em;
+}
+#menu li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  display: block;
+}
+#menu li:hover {
+  background: #CDE2CD;
+}

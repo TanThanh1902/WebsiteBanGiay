@@ -1,0 +1,17 @@
+﻿@using WebsiteBanGiay.Models;
+@model List<Giay>
+    <div class="lady-in">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 you-para">
+                <a href="@Url.Action("XemChiTiet","LocWebsite", new {@magiay = item.MaGiay })"><img class="img-responsive pic-in" src="@Url.Content("~/HinhAnh/Giay/"+item.HinhAnhGiay)" alt=" " style="height: 200px"></a>
+                <div class="you-in">
+                    <span>@item.GiamGia<label>%</label></span>
+                    <small>giảm giá</small>
+                </div>
+                <p>@item.TenGiay</p>
+                <span><b style="color: brown;">@item.GiaTien VNĐ</b> | <label class="cat-in"> </label> <a href="@Url.Action("Themvaogio", "GioHang", new { @maGiay = item.MaGiay })">Thêm vào giỏ hàng </a></span>
+            </div>
+        }
+        <div class="clearfix"> </div>
+    </div>

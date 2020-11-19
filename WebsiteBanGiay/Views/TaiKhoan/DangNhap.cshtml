@@ -1,0 +1,59 @@
+﻿@using WebsiteBanGiay.Models;
+@{
+    KhachHang seskh = (KhachHang)Session["kh"];
+    Admin sesad = (Admin)Session["ad"];
+
+    if (sesad != null)
+    {
+        <div class="header-grid-right" style="font-size: 20px;">
+            <span style="color: white"><i class="fa fa-user">&nbsp;</i>Xin chào: @seskh.TenKhachHang</span>|
+            <a style="color: white" href="@Url.Action("DangXuat", "TaiKhoan")" class="btn btn-danger"><i class="fas fa-sign-out-alt">&nbsp;</i>Đăng xuất</a>
+        </div>
+    }
+    else if (seskh != null)
+    {
+        <div class="header-grid-right" style="font-size: 20px;">
+            <span style="color: white"><i class="fa fa-user">&nbsp;</i>Xin chào: @seskh.TenKhachHang</span>|
+            <a style="color: white" href="@Url.Action("DangXuat", "TaiKhoan")" class="btn btn-danger"><i class="fas fa-sign-out-alt">&nbsp;</i>Đăng xuất</a>
+        </div>
+    }
+    else
+    {
+        <div class="header-grid-right">
+            <form action="@Url.Action("DangNhap", "TaiKhoan")" method="post">
+                <input type="text" name="txtTaiKhoan" placeholder="Tài khoản" class="form-control" required>
+                <input type="password" name="txtMatKhau" placeholder="Mật khẩu" class="form-control" required>
+                <input type="submit" value="Vào" style="width: 50px">
+            </form>
+            <label>|</label>
+            <a href="#" class="sign-up" type="button" data-toggle="modal" data-target="#dangky">
+                Đăng ký
+            </a>
+        </div>
+        @Html.Action("DangKy", "TaiKhoan")
+    }
+}
+<style>
+    .header-grid-right input[type="password"] {
+	width: 26%;
+	margin-right: 8px;
+}
+    .header-grid-right input[type="password"],.header-grid-right input[type="password"]{
+	outline: none;
+	border: none;
+	background: #4a4a4a;
+	color: #ababab;
+	font-size: 0.9em;
+	padding: 5px 12px;
+	border-radius: 25px;
+	-webkit-border-radius: 25px;
+	-o-border-radius: 25px;
+	-moz-border-radius: 25px;
+	-ms-border-radius: 25px;
+	float: left;
+	width: 27%;
+	margin-right: 18px;
+}
+</style>
+
+

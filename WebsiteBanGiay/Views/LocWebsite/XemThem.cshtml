@@ -1,0 +1,111 @@
+﻿@using WebsiteBanGiay.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Giay>
+@{
+    ViewBag.Title = "XemThem";
+    Layout = "~/Views/Layout/Layout.cshtml";
+}
+<!--content-->
+<div class="content">
+    <div class="container">
+        <div class="women-in">
+            <div class="col-md-9 col-d">
+                <div>
+                    <div class="content">
+                        <div class="container">
+                            <div class="women-in">
+                                <div class="col-md-9 col-d">
+                                    <div class="in-line">
+                                        <div class="para-an" id="4">
+                                            <img src="~/HinhAnh/DanhMuc/puma.png" style="width: 50px; height: 50px; float: left" />
+                                            <h3 style="text-transform: uppercase">@ViewBag.Tb</h3>
+                                            <br />
+                                        </div>
+                                        <div class="lady-in">
+                                            @foreach (var item in Model)
+                                            {
+                                                <div class="col-md-4 you-para">
+                                                    <a href="@Url.Action("XemChiTiet","LocWebsite", new {@magiay = item.MaGiay })"><img class="img-responsive pic-in" src="@Url.Content("~/HinhAnh/Giay/"+item.HinhAnhGiay)" alt=" " style="height: 200px"></a>
+                                                    <div class="you-in">
+                                                        <span>@item.GiamGia<label>%</label></span>
+                                                        <small>giảm giá</small>
+                                                    </div>
+                                                    <p>@item.TenGiay</p>
+                                                    <span><b style="color: brown;">@item.GiaTien VNĐ</b> | <label class="cat-in"> </label> <a href="@Url.Action("Themvaogio", "GioHang", new { @maGiay = item.MaGiay })">Thêm vào giỏ hàng </a></span>
+                                                </div>
+                                            }
+                                            <div class="clearfix"> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-left: 45%">
+                        @Html.PagedListPager(Model, Page => Url.Action("TimKiemTK", new { Page = Page }))
+                    </div>
+
+
+                </div>
+                <!---->
+                <div class="in-line">
+                    <div class="para-an">
+                        <h3>ĐANG GIẢM GIÁ</h3>
+                        <p>Các sản phẩm giảm giá</p>
+                    </div>
+                    @Html.Action("SanPhamGiamGia", "LocWebsite")
+                </div>
+                @Html.Action("DanhMucSanPham", "LocWebsite")
+            </div>
+            <div class="col-md-3 col-m-left">
+                <div style="text-align: center; font-size: 25px; color: #4267b2; font-weight:bold">DANH MỤC SẢN PHẨM</div>
+                <div class="twitter-in" style="background-color: #f6f6f4 !important">
+                    @Html.Action("DanhSachDanhMuc", "LocWebsite")
+                    @Html.Action("HangMoiVe", "LocWebsite")
+                    @Html.Action("HangBanChay", "LocWebsite")
+                </div>
+                <div class="in-left">
+                    <p class="code">Cool COLLECTIONS</p>
+                    <div class="cool">
+                    </div>
+                </div>
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!---->
+        <div class="lady-in-on">
+
+            <script type="text/javascript">
+                    $(window).load(function () {
+                        $("#flexiselDemo1").flexisel({
+                            visibleItems: 4,
+                            animationSpeed: 1000,
+                            autoPlay: true,
+                            autoPlaySpeed: 3000,
+                            pauseOnHover: true,
+                            enableResponsiveBreakpoints: true,
+                            responsiveBreakpoints: {
+                                portrait: {
+                                    changePoint: 480,
+                                    visibleItems: 1
+                                },
+                                landscape: {
+                                    changePoint: 640,
+                                    visibleItems: 2
+                                },
+                                tablet: {
+                                    changePoint: 768,
+                                    visibleItems: 3
+                                }
+                            }
+                        });
+
+                    });
+            </script>
+            <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+        </div>
+    </div>
+</div>
+<!---->

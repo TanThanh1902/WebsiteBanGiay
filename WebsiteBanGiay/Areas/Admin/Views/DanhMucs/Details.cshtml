@@ -1,0 +1,35 @@
+﻿@model WebsiteBanGiay.Models.DanhMuc
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DanhMuc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDanhMuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDanhMuc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HinhAnhDanhMuc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HinhAnhDanhMuc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaDanhMuc }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

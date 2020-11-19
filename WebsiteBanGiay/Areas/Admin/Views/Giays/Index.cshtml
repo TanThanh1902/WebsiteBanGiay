@@ -1,0 +1,108 @@
+﻿@using WebsiteBanGiay.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Giay>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2 class="tieude">giày</h2>
+<a href="@Url.Action("Create")" class="btn btn-danger">Thêm mới</a>
+<hr />
+<table class="table table-striped" style="border:1px solid black;color: black">
+    <tr style="background-color: orange;">
+        <th>
+            <b class="mau"><i class="fa fa-sort-alpha-up-alt">&nbsp;</i>Mã giày</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-list-alt">&nbsp;</i>Tên giày</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-image">&nbsp;</i>Hình ảnh</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fab fa-reddit-alien">&nbsp;</i>Đơn giá</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-s">&nbsp;</i>Kích cở</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-calendar-alt">&nbsp;</i>Ngày hàng về</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-ruler">&nbsp;</i>Nam/ Nữ</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-sticky-note">&nbsp;</i>Collection</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-sticky-note">&nbsp;</i>Hãng giày</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-tools">&nbsp;</i>Tools</b>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaGiay)
+            </td>
+           <td>
+                @Html.DisplayFor(modelItem => item.TenGiay)
+            </td>
+            <td>
+                <img src="@Url.Content("~/HinhAnh/Giay/" + item.HinhAnhGiay)"  width="100" height="100"/>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaTien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KichCo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayHangVe)
+            </td>
+            <td>
+                @if(item.Phai == 0)
+                {
+                    <p>Nam</p>
+                }
+                else if(item.Phai == 1)
+                {
+                    <p>Nữ</p>
+                }
+                else
+                {
+                    <p>Nam/ nữ</p>
+                }
+            </td>
+            <td>
+                @if(item.Collection == true)
+                {
+                    <p>Collection</p>
+                }
+                else
+                {
+                    <p>Không</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DanhMuc.TenDanhMuc)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "Giays", new { @id = item.MaGiay })"><b><i class="fa fa-edit"></i></b></a>
+                <a href="@Url.Action("DeleteConfirmed", "Giays", new { @id = item.MaGiay })" onclick="return confirm('Are your sure?')"><b><i class="fa fa-trash-alt"></i></b></a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div style="float: right">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>

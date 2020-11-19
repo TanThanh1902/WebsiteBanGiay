@@ -1,0 +1,236 @@
+﻿@using WebsiteBanGiay.Models;
+@model List<GioHangs>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/Layout.cshtml";
+    KhachHang kh = (KhachHang)Session["kh"];
+
+    if (Model == null)
+    {
+        <!--content-->
+        <div class="content">
+            <div class="container">
+                <div class="women-in">
+                    <div class="col-md-9 col-d">
+                        <div>
+                            <hr />
+                            <div class="content">
+                                <div class="container">
+                                    <div class="women-in">
+                                        <div class="col-md-9 col-d">
+                                            <div class="alert-danger" role="alert">
+                                                <p>Giỏ hàng trống. Vui lòng chọn sản phẩm tại <a href="/HienThi/Index">đây</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+                        <!---->
+                        <div class="in-line">
+                            <div class="para-an">
+                                <h3>ĐANG GIẢM GIÁ</h3>
+                                <p>Các sản phẩm giảm giá</p>
+                            </div>
+                            @Html.Action("SanPhamGiamGia", "LocWebsite")
+                        </div>
+                        @Html.Action("DanhMucSanPham", "LocWebsite")
+                    </div>
+                    <div class="col-md-3 col-m-left">
+                        <div style="text-align: center; font-size: 25px; color: #4267b2; font-weight:bold">DANH MỤC SẢN PHẨM</div>
+                        <div class="twitter-in" style="background-color: #f6f6f4 !important">
+                            @Html.Action("DanhSachDanhMuc", "LocWebsite")
+                            @Html.Action("HangMoiVe", "LocWebsite")
+                            @Html.Action("HangBanChay", "LocWebsite")
+                        </div>
+                        <div class="in-left">
+                            <p class="code">Cool COLLECTIONS</p>
+                            <div class="cool">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <!---->
+                <div class="lady-in-on">
+
+                    <script type="text/javascript">
+                        $(window).load(function () {
+                            $("#flexiselDemo1").flexisel({
+                                visibleItems: 4,
+                                animationSpeed: 1000,
+                                autoPlay: true,
+                                autoPlaySpeed: 3000,
+                                pauseOnHover: true,
+                                enableResponsiveBreakpoints: true,
+                                responsiveBreakpoints: {
+                                    portrait: {
+                                        changePoint: 480,
+                                        visibleItems: 1
+                                    },
+                                    landscape: {
+                                        changePoint: 640,
+                                        visibleItems: 2
+                                    },
+                                    tablet: {
+                                        changePoint: 768,
+                                        visibleItems: 3
+                                    }
+                                }
+                            });
+
+                        });
+                    </script>
+                    <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+                </div>
+            </div>
+        </div>
+        <!---->
+       
+    }
+    else
+    {
+        <!--content-->
+        <div class="content">
+            <div class="container">
+                <div class="women-in">
+                    <div class="col-md-9 col-d">
+                        <div>
+                            <hr />
+                            <div class="content">
+                                <div class="container">
+                                    <div class="women-in">
+                                        <div class="col-md-9 col-d">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <th>Hình</th>
+                                                                <th>Tên sản phẩm</th>
+                                                                <th>Số lượng</th>
+                                                                <th>Đơn giá</th>
+                                                                <th>Thành tiền</th>
+                                                                <th></th>
+                                                            </tr>
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                <tr>
+                                                                    <td class="text-center"><img src="@Url.Content("~/HinhAnh/Giay/" + item.hinhAnh)" width="70" height="60" /> </td>
+                                                                    <td><a target="_blank" href="@Url.Action("XemChiTiet", "LocWebsite", new { @magiay = item.maGiay })"> @item.tenGiay </a> </td>
+                                                                    <td>
+                                                                        <form action="@Url.Action("Suasoluong")" method="get">
+                                                                            <input type="hidden" name="maGiay" value="@item.maGiay" />
+                                                                            <input type="number" min="1" step="1" name="soluongmoi" value="@item.soLuong" />
+                                                                            <button type="submit" class="btn btn-primary btn-sm"> Cập nhật </button>
+                                                                        </form>
+                                                                    </td>
+                                                                    <td> @item.donGia.ToString("#,##0").Replace(',', '.') VNĐ </td>
+                                                                    <td> @item.thanhTien.ToString("#,##0").Replace(',', '.') VNĐ </td>
+
+                                                                    <td> <a href="@Url.Action("Xoakhoigio", new { @maGiay = item.maGiay })" onclick="return confirm('Bạn có chắc muốn xóa sản phẩm này?');" class="btn btn-danger btn-sm">Xóa</a> </td>
+                                                                </tr>
+                                                            }
+                                                            <tr>
+                                                                <td></td>
+                                                                <td class="text-right">Tổng số lượng:</td>
+                                                                <td> @Model.Sum(m => m.soLuong) </td>
+                                                                <td class="text-right">Tổng thành tiền:</td>
+                                                                <td>@Model.Sum(m => m.thanhTien).ToString("#,##0").Replace(',', '.') VNĐ </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    @if (Session["kh"] != null)
+                                                    {
+                                                        <a href="@Url.Action("ThanhToan", "GioHang", new { @maKH = kh.MaKhachHang })"><input type="submit" value="Thanh toán" class="btn btn-success" style="margin-left: 70%" /></a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a href="#" onclick="return confirm('Vui lòng đăng nhập trước khi thanh toán');"><input type="submit" value="Thanh toán" class="btn btn-success" style="margin-left: 70%" /></a>
+                                                    }
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!---->
+                        <div class="in-line">
+                            <div class="para-an">
+                                <h3>ĐANG GIẢM GIÁ</h3>
+                                <p>Các sản phẩm giảm giá</p>
+                            </div>
+                            @Html.Action("SanPhamGiamGia", "LocWebsite")
+                        </div>
+                        @Html.Action("DanhMucSanPham", "LocWebsite")
+                    </div>
+                    <div class="col-md-3 col-m-left">
+                        <div style="text-align: center; font-size: 25px; color: #4267b2; font-weight:bold">DANH MỤC SẢN PHẨM</div>
+                        <div class="twitter-in" style="background-color: #f6f6f4 !important">
+                            @Html.Action("DanhSachDanhMuc", "LocWebsite")
+                            @Html.Action("HangMoiVe", "LocWebsite")
+                            @Html.Action("HangBanChay", "LocWebsite")
+                        </div>
+                        <div class="in-left">
+                            <p class="code">Cool COLLECTIONS</p>
+                            <div class="cool">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <!---->
+                <div class="lady-in-on">
+
+                    <script type="text/javascript">
+                        $(window).load(function () {
+                            $("#flexiselDemo1").flexisel({
+                                visibleItems: 4,
+                                animationSpeed: 1000,
+                                autoPlay: true,
+                                autoPlaySpeed: 3000,
+                                pauseOnHover: true,
+                                enableResponsiveBreakpoints: true,
+                                responsiveBreakpoints: {
+                                    portrait: {
+                                        changePoint: 480,
+                                        visibleItems: 1
+                                    },
+                                    landscape: {
+                                        changePoint: 640,
+                                        visibleItems: 2
+                                    },
+                                    tablet: {
+                                        changePoint: 768,
+                                        visibleItems: 3
+                                    }
+                                }
+                            });
+
+                        });
+                    </script>
+                    <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+                </div>
+            </div>
+        </div>
+        <!---->
+
+    }
+}
+
+<div class="modal fade" id="dangky" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="alert-danger" role="alert">
+                <p>Vui lòng đăng nhập trước khi thanh toán.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+

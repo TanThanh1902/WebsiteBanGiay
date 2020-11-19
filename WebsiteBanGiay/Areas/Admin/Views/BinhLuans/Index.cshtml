@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebsiteBanGiay.Models.BinhLuan>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MaGiay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BinhLuan1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayDang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KhachHang.TenKhachHang)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaGiay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BinhLuan1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgayDang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KhachHang.TenKhachHang)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MaBinhLuan }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MaBinhLuan }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MaBinhLuan })
+        </td>
+    </tr>
+}
+
+</table>

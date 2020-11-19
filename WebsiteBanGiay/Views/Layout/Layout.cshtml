@@ -1,0 +1,105 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website bán giày</title>
+    <link href="~/Content/Layout/fashion_store-web/web/css/bootstrap.css" rel="stylesheet" />
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- Custom Theme files -->
+    <!--theme-style-->
+    <link href="~/Content/Layout/fashion_store-web/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Fashion Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,700,400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--//fonts-->
+    <link href="~/Content/Menu.css" rel="stylesheet" />
+    <link href="~/Content/Slider.css" rel="stylesheet" />
+    <script src="~/Content/Layout/fashion_store-web/web/js/jquery.min.js"></script>
+    <link href="~/Content/fontawesome-free-5.11.2-web/css/all.min.css" rel="stylesheet" />
+</head>
+<body style="font-family: Arial !important">
+    <!--header-->
+    <div class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-grid">
+                    <ul style="font-size: 14px">
+                        <li><a href="@Url.Action("Index", "GioHang")" class="scroll"><i class="fa fa-cart-plus"></i>&nbsp; Giỏ hàng(@Session["slgh"])</a></li>
+                    </ul>
+                </div>
+                @Html.Action("DangNhap", "TaiKhoan")
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="header-bottom">
+                <div class="logo">
+                    <a href="/HienThi/Index"><img src="~/Content/Layout/fashion_store-web/web/images/logo.png" alt=" "></a>
+                </div>
+                <div class="ad-right">
+                    <img class="img-responsive" src="~/Content/Layout/fashion_store-web/web/images/ad.png" alt=" ">
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="header-bottom-bottom">
+                <div class="top-nav">
+                    <span class="menu"> </span>
+                    <ul>
+                        <li class="active"><a href="/HienThi/Index">TRANG CHỦ </a></li>
+                        <li><a href="@Url.Action("GiayThuocPhai", "LocWebsite", new { @maPhai = 0 })">GIÀY NAM</a></li>
+                        <li><a href="@Url.Action("GiayThuocPhai", "LocWebsite", new { @maPhai = 1 })">GIÀY NỮ</a></li>
+                        <li><a href="@Url.Action("GiayCollections", "LocWebsite")">BỘ SƯU TẬP</a></li>
+                    </ul>
+                    <script>
+                        $("span.menu").click(function () {
+                            $(".top-nav ul").slideToggle(500, function () {
+                            });
+                        });
+                    </script>
+
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="search">
+                    <form action="@Url.Action("TimKiemTK", "HienThi")">
+                        <input type="text" name="tukhoa">
+                        <input type="submit" value="">
+                    </form>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    @RenderBody()
+    <div class="footer">
+        <div class="container">
+            <div class="footer-class">
+                <div class="class-footer">
+                    <ul>
+                        <li><a href="/Home/Index" class="scroll">HOME </a><label>|</label></li>
+                        <li><a href="@Url.Action("GiayThuocPhai", "LocWebsite", new { @maPhai = 0 })" class="scroll">MEN</a><label>|</label></li>
+                        <li><a href="@Url.Action("GiayThuocPhai", "LocWebsite", new { @maPhai = 1 })" class="scroll">WOMEN</a><label>|</label></li>
+                        <li><a href="@Url.Action("GiayCollections", "LocWebsite")" class="scroll">COLLECTION</a></li>
+                    </ul>
+                    <p class="footer-grid">&copy; 2014 Template by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>
+                </div>
+                <div class="footer-left">
+                    <a href="/Home/Index"><img src="~/Content/Layout/fashion_store-web/web/images/logo1.png" alt=" "></a>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+﻿@model WebsiteBanGiay.Models.DonDatHang
+
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Layout/Layout.cshtml";
+}
+
+<h2 style="color: red;text-align: center">Thông tin đơn hàng</h2>
+
+
+<!--content-->
+<div class="content">
+    <div class="container">
+        <div class="women-in">
+            <div class="col-md-9 col-d">
+                <div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="">
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.MaDH)
+
+
+                        <div class="form-group">
+                            <b class="control-label col-md-3">Tên khách hàng</b>
+                            <div class="col-md-8">
+                                <input type="text" value="@Model.KhachHang.TenKhachHang" disabled="" class="form-control" style="width" />
+                            </div>
+                        </div>
+                        <br /><br />  <br />
+                        <div class="form-group">
+                            <b class="control-label col-md-3">Số điện thoại</b>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.SDTNhan, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SDTNhan, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="form-group">
+                            <b class="control-label col-md-3">Địa chỉ nhận</b>
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.DiaChiNhan, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.DiaChiNhan, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="form-group">
+                            <b class="control-label col-md-3">Hình thức thanh toán</b>
+                            <div class="col-md-8">
+                                <select name="HTTT" class="form-control">
+                                    <option value="true">Thanh toán khi nhận hàng</option>
+                                    <option value="false">Thanh toán online</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="form-group">
+                            <b class="control-label col-md-3">Hình thức giao hàng</b>
+                            <div class="col-md-8">
+                                <select name="HTGH" class="form-control">
+                                    <option value="true">Giao hàng tận nơi</option>
+                                    <option value="false">Giao hàng qua bưu điện</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="form-group">
+                            <b class="control-label col-md-3">Tổng thanh toán</b>
+                            <div class="col-md-8">
+                                <input type="text" value="@Model.TongThanhToan" disabled="" class="form-control" />
+                            </div>
+                        </div>
+                        <br /><br />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10" style="margin-left: 70%">
+                                <input type="submit" value="Thanh toán" class="btn btn-success" />
+                            </div>
+                        </div>  <br /><br />
+                    </div>
+                    }
+                    <hr />
+                </div>
+                <!---->
+                <div class="clearfix"> </div>
+                <div class="in-line">
+                    <div class="para-an">
+                        <h3>ĐANG GIẢM GIÁ</h3>
+                        <p>Các sản phẩm giảm giá</p>
+                    </div>
+                    @Html.Action("SanPhamGiamGia", "LocWebsite")
+                </div>
+                @Html.Action("DanhMucSanPham", "LocWebsite")
+            </div>
+            <div class="col-md-3 col-m-left">
+                <div style="text-align: center; font-size: 25px; color: #4267b2; font-weight:bold">DANH MỤC SẢN PHẨM</div>
+                <div class="twitter-in" style="background-color: #f6f6f4 !important">
+                    @Html.Action("DanhSachDanhMuc", "LocWebsite")
+                    @Html.Action("HangMoiVe", "LocWebsite")
+                    @Html.Action("HangBanChay", "LocWebsite")
+                </div>
+                <div class="in-left">
+                    <p class="code">Cool COLLECTIONS</p>
+                    <div class="cool">
+                    </div>
+                </div>
+
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!---->
+        <div class="lady-in-on">
+
+            <script type="text/javascript">
+                    $(window).load(function () {
+                        $("#flexiselDemo1").flexisel({
+                            visibleItems: 4,
+                            animationSpeed: 1000,
+                            autoPlay: true,
+                            autoPlaySpeed: 3000,
+                            pauseOnHover: true,
+                            enableResponsiveBreakpoints: true,
+                            responsiveBreakpoints: {
+                                portrait: {
+                                    changePoint: 480,
+                                    visibleItems: 1
+                                },
+                                landscape: {
+                                    changePoint: 640,
+                                    visibleItems: 2
+                                },
+                                tablet: {
+                                    changePoint: 768,
+                                    visibleItems: 3
+                                }
+                            }
+                        });
+
+                    });
+            </script>
+            <script type="text/javascript" src="js/jquery.flexisel.js"></script>
+        </div>
+    </div>
+</div>
+<!---->

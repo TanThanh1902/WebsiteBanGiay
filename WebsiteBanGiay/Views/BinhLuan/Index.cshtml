@@ -1,0 +1,105 @@
+﻿@using WebsiteBanGiay.Models;
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<BinhLuan>
+@{ 
+}
+
+<center style="margin-top: 4%">
+    <ul class="" style="width: 80%">
+        <li class="list-group-item" style="background-color: #4267b2; color: white; font-weight: bold">Bình luận</li>
+        <li class="list-group-item" style="width:100%">
+            <div class="">
+                @using (Html.BeginForm("ThemBinhLuan", "BinhLuan", FormMethod.Post))
+                {
+                    <img src="~/HinhAnh/tải xuống.png" style="border-radius:100%;width:100px; height:100px; border:1px solid black; float: left" />
+                    <input type="text" name="BinhLuan1" style="width: 90%; height: 50px; float: right;margin-top: 2%" placeholder="Add comment..." class="form-control" id="ktratext" />
+                    if (Session["kh"] != null)
+                    {
+
+                        <input type="submit" value="Bình luận" class="btn btn-danger" style="margin-top: 2%;float: left;margin-left: 1%" />
+                    }
+                    else
+                    {
+                        <a href="#" class="btn btn-danger" style="margin-top: 2%;float: left;margin-left: 1%" id="btnSub">Bình luận</a>
+                    }
+                }
+                <br />
+                <table class="table">
+
+                    @foreach (var itemcmt in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div style="margin-left: 3%" class="alert alert-success">
+                                    <img src="~/HinhAnh/tải xuống.png" style="border-radius:100%;width:40px; height:40px; border:1px solid black; float: left" />
+                                    <span style="margin-left: 15px;font-size: 16px;color: green; font-weight: bold">@itemcmt.KhachHang.TenKhachHang</span><br />
+                                    <span style="font-size: 15px; margin-left:10px;color: black">@itemcmt.BinhLuan1</span>
+                                    <span style="margin-left: 10px; float: right">@itemcmt.NgayDang</span><br />
+                                    <a data-toggle="collapse" data-target="#@itemcmt.MaBinhLuan" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation" style="color: black; font-weight:bold;float: right;font-size: 10px;color: white" class="btn btn-danger">VIEW REPLY</a>
+
+                                </div>
+                                <div class="pos-f-t">
+                                    <div class="collapse" id="@itemcmt.MaBinhLuan">
+                                        @foreach (var itemrep in itemcmt.TraLois)
+                                        {
+                                            <div style="margin-left: 10%" class="alert alert-success">
+                                                <img src="~/HinhAnh/tải xuống.png" style="border-radius:100%;width:40px; height:40px; border:1px solid black; float: left" />
+                                                <span style="margin-left: 15px;font-size: 16px;color: green; font-weight: bold">@itemcmt.KhachHang.TenKhachHang</span><br />
+                                                <span style="margin-left: 15px;font-size: 16px;color: black;">@itemrep.TraLoi1</span><br />
+                                                <span style="margin-left: 10px; float: right">@itemcmt.NgayDang</span>
+                                            </div>
+                                        }
+                                        <br />
+                                        @using (Html.BeginForm("ThemTraLoi", "BinhLuan", FormMethod.Post))
+                                        {
+                                            <input type="hidden" name="MaBinhLuan" value="@itemcmt.MaBinhLuan" />
+                                            <input type="text" name="TraLoi1" style="margin-left:5%; width: 96%; height: 50px" min="50" required class="form-control" placeholder="Reply..." id="ktratl"/>
+                                            if (Session["kh"] != null)
+                                            {
+                                                <input type="submit" value="" class="" style="margin-top: 2%;float: left;margin-left: 1%;background-color: white; border: 0px solid white" id=" btntl" />
+                                            }
+                                            else
+                                            {
+                                                <a href="#" id="btntl" ></a>
+                                            }
+
+                                        }
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+                <center>
+                    <div>
+                        @*PageNumber @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount*@
+                        @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+                    </div>
+                </center>
+            </div>
+        </li>
+    </ul>
+</center>
+<style>
+    .card-inner {
+        margin-left: 4rem;
+    }
+</style>
+<script>
+$("#ktratext").keypress(function(event){
+    if (event.keyCode == 13) {
+    $("#btnSub").click();
+  }
+});
+$("#btnSub").click(function() { alert("Vui lòng đăng nhập trước khi bình luận"); });
+
+$("#ktratl").keypress(function(event){
+    if (event.keyCode == 13) {
+    $("#btntl").click();
+  }
+});
+$("#btntl").click(function() { alert("Vui lòng đăng nhập trước khi bình luận"); });
+</script>

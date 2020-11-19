@@ -1,0 +1,17 @@
+﻿@using WebsiteBanGiay.Models;
+@model List<DanhMuc>
+
+@foreach (var item in Model)
+{
+    <div class="in-line">
+        <div class="para-an" id="@item.MaDanhMuc">
+            <img src="~/HinhAnh/DanhMuc/@item.HinhAnhDanhMuc" style="width: 50px; height: 50px; float: left" />
+            <h3 style="text-transform: uppercase">@item.TenDanhMuc MỚI VỀ</h3>
+            <br />
+        </div>
+        <div class="lady-in">
+            @Html.Action("SanPhamMoiTheoDM", "LocWebsite", new { @maDM = item.MaDanhMuc })
+        </div>
+        <center> <a href="@Url.Action("XemThem", "LocWebsite", new { @maDM = item.MaDanhMuc })"><button class="btn btn-danger">XEM NHIỀU</button></a></center>
+    </div>
+}

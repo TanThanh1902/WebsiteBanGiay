@@ -1,0 +1,89 @@
+﻿@using WebsiteBanGiay.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.PagedList<KhachHang>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="tieude">Khách hàng</h2>
+
+<hr />
+<table class="table table-striped" style="border:1px solid black;color: black">
+    <tr style="background-color: orange;">
+        <th>
+            <b class="mau"><i class="fa fa-sort-alpha-up-alt">&nbsp;</i>Mã khách hàng</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-user-alt">&nbsp;</i>Tên khách hàng</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-phone-alt">&nbsp;</i>Só điện thoại</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-mail-bulk">&nbsp;</i>Email/Tài khoản</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-address-book">&nbsp;</i>Địa chỉ</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-key">&nbsp;</i>Mật khẩu</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-ruler">&nbsp;</i>Vai trò</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-sticky-note">&nbsp;</i>Ghi chú</b>
+        </th>
+        <th>
+            <b class="mau"><i class="fa fa-tools">&nbsp;</i>Tools</b>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaKhachHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenKhachHang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoDienThoai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaChi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatKhau)
+            </td>
+            <td>
+                @if(item.Quyen == 0)
+                {
+                    <p>Người dùng</p>
+                }
+                else
+                {
+                    <p>Admin cấp 2</p>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GhiChu)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", "KhachHangs", new { @id = item.MaKhachHang })"><b><i class="fa fa-edit"></i></b></a>
+                <a href="@Url.Action("DeleteConfirmed", "KhachHangs", new { @id = item.MaKhachHang })" onclick="return confirm('Are your sure?')"><b><i class="fa fa-trash-alt"></i></b></a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div style="float: right">
+    @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page = Page }))
+</div>
